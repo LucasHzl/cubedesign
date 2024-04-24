@@ -4,8 +4,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-abstract class AbstractFixtures extends Fixture
+
+abstract class AbstractFixture extends Fixture
 {
+
+    
 protected Generator $faker;
     protected UserPasswordHasherInterface $passwordHasher;
     public function __construct(UserPasswordHasherInterface $passwordHasher)

@@ -2,29 +2,34 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Product;
 use App\Entity\Users;
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
-class ProductFixtures extends AbstractFixture
+class UsersFixture extends AbstractFixture
 {
-    public function load(ObjectManager $manager)
-    {
-
-        for ($i = 0; $i < 10; $i ++) {
-
-            $user = new Users();
-            $user->setFirstName($this->faker->word());
-            $user->setLastName($this->faker->word());
-            $user->setEmail($this->faker->word());
-            $user->setPassword($this->faker->word());
-            $user->setRoles($this->faker->word());
 
 
-            $manager->persist($user);
-}
-        $manager->flush();
+        public function load(ObjectManager $manager)
+        {
+
+            for ($i = 0; $i < 10; $i ++) {
+
+                $user = new Users();
+                $user->setFirstName($this->faker->name());
+                $user->setLastName($this->faker->name());
+                $user->setEmail($this->faker->email());
+                $user->setRoles(['ROLE_USER']);
+
+                $user->setPassword(
+                    $this->passwordHasher->hashPassword(
+                        $user,
+                        $this->faker->password()
+                    )
+                );
+
+                $manager->persist($user);
+    }
+            $manager->flush();
 } 
 }

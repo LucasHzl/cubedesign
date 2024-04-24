@@ -29,6 +29,10 @@ class Categories
         $this->relation_categories_products = new ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->title;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

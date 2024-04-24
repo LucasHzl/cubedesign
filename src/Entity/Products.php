@@ -8,6 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
+
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
 class Products
 {
@@ -34,12 +40,16 @@ class Products
     #[ORM\ManyToMany(targetEntity: Orders::class, inversedBy: 'products')]
     private Collection $relation_products_orders;
 
-    #[ORM\Column(type: Types::BLOB)]
-    private $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'relation_categories_products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categories $category = null;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
 
     public function __construct()
     {
@@ -123,17 +133,6 @@ class Products
         return $this;
     }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getCategory(): ?Categories
     {
@@ -146,4 +145,28 @@ class Products
 
         return $this;
     }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
 }
+
+
