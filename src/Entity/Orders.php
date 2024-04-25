@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrdersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
@@ -26,6 +27,9 @@ class Orders
 
     #[ORM\Column(length: 5)]
     private ?string $order_number = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function __construct()
     {
@@ -84,6 +88,18 @@ class Orders
     public function setOrderNumber(string $order_number): static
     {
         $this->order_number = $order_number;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

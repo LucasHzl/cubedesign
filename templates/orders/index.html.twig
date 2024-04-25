@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Order_number</th>
+                <th>Date</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.orderNumber }}</td>
+                <td>{{ order.date ? order.date|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_orders_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('app_orders_edit', {'id': order.id}) }}">edit</a>
@@ -25,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

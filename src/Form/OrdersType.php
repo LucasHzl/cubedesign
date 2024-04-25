@@ -16,6 +16,9 @@ class OrdersType extends AbstractType
     {
         $builder
             ->add('order_number')
+            ->add('date', null, [
+                'widget' => 'single_text',
+            ])
             ->add('user', EntityType::class, [
                 'class' => Users::class,
                 'choice_label' => 'id',

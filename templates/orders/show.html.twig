@@ -15,6 +15,10 @@
                 <th>Order_number</th>
                 <td>{{ order.orderNumber }}</td>
             </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ order.date ? order.date|date('Y-m-d') : '' }}</td>
+            </tr>
         </tbody>
     </table>
 
