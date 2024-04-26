@@ -1,19 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+	<header class="flex justify-between items-center w-full h-20 bg-amber-200">
+		<a href={{"/home"}}>
+			<h1 class="ml-14 text-2xl">CubeDesign</h1>
+		</a>
+		<div class="flex justify-center items-center gap-5 mr-14">
+			<a href={{"/login"}}>Connexion</a>
+			<a href={{"/register"}}>Inscription</a>
+			<a href={{"/cart"}}>Panier</a>
+		</div>
+	</header>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+	<section class="flex justify-center items-center">
+		<div class="flex justify-start items-start">
+			{{ form_errors(registrationForm) }}
+			<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+				{{ form_start(registrationForm) }}
+				<div class="mb-4">
+					{{ form_row(registrationForm.first_name, {label: 'Prénom'})}}
+					{{ form_row(registrationForm.last_name, {label: 'Nom'})}}
+					<div class="">{{ form_row(registrationForm.email, {label: 'Email'})}}</div>
+					{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'})}}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+
+					<button type="submit" class="btn">S'inscrire</button>
+					{{ form_end(registrationForm) }}
+				</form>
+			</div>
+		</section>
+	{% endblock %}
