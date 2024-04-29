@@ -1,40 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
-{% endblock %}
+{% block title %}CubeDesign - Connexion{% endblock %}
 
 {% block body %}
 
-	<header class="flex justify-between items-center w-full h-20 bg-amber-200">
-		<a href={{"/home"}}>
-			<h1 class="ml-14 text-2xl">CubeDesign</h1>
-		</a>
-		<div class="flex justify-center items-center gap-5 mr-14">
-			<a href={{"/login"}}>Connexion</a>
-			<a href={{"/register"}}>Inscription</a>
-			<a href={{"/cart"}}>Panier</a>
-		</div>
-	</header>
-
-
-	<section class="flex justify-center items-center mt-40">
+	<section class="flex justify-center items-center mt-20">
 		<div class="w-full max-w-xs">
 			<form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 				{% if error %}
 					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 				{% endif %}
 
-				{% if app.user %}
-					<div class="mb-3">
-						Vous êtes déjà connecté avec l'adresse mail : 
-						{{ app.user.userIdentifier }} !
-                        <br>
-                        <br>
-						<a href="{{ path('app_logout') }}">Logout</a>
-					</div>
-				{% endif %}
-
-				<h2 class="h3 mb-3 font-weight-normal">S'identifier</h2>
+				<h2 class="h3 mb-3 mt-6 font-weight-normal">S'identifier</h2>
 
 				<div class="mb-4 ">
 					<label for="inputEmail" class="block text-gray-700 text-sm font-bold mb-2">Email</label>

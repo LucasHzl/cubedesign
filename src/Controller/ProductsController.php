@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/products')]
 class ProductsController extends AbstractController
 {
-    #[Route('/', name: 'app_products_index', methods: ['GET'])]
+    #[Route('/ppp', name: 'app_products_index', methods: ['GET'])]
     public function index(ProductsRepository $productsRepository): Response
     {
         return $this->render('products/index.html.twig', [
@@ -42,9 +42,10 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_products_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_products', methods: ['GET'])]
     public function show(Products $product): Response
     {
+        
         return $this->render('products/show.html.twig', [
             'product' => $product,
         ]);

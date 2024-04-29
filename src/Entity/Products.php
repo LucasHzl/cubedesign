@@ -166,7 +166,4 @@ class Products
     {
         return $this->imageName;
     }
-
 }
-
-
