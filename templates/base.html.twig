@@ -28,7 +28,7 @@
 				<div class="flex justify-center items-center gap-5 mr-14">
 						
 					{% if app.user %}
-						<a href="/profil">{{ app.user.userIdentifier }}</a>
+						<a href="/profil">{{ app.user.firstName ~ ' ' ~ app.user.lastName}}</a>
 						<a href="{{ path('app_logout') }}">Deconnexion</a>
 					{% else %}
 						<a href={{"/login"}}>Connexion</a>

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 #[Route('/users')]
 class UsersController extends AbstractController
@@ -78,4 +79,15 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    // #[Route('/profil', name: 'app_profil')]
+    // public function profil(EntityManagerInterface $entityManager, HttpFoundationRequest $request): Response
+    // {
+    //     $user = $this->getUser();
+
+    //     return $this->render('users/profil.html.twig', [
+    //         'controller_name' => 'UsersController',
+    //         'user' => $user,
+    //     ]);
+    // }
 }

@@ -20,31 +20,47 @@
 		</div>
 	</div>
 
-	<h2 class="flex justify-center items-center mt-16 text-xl">Nos Produits</h2>
+	<h2 class="flex justify-center items-center mt-16 mb-20 text-xl">Nos Produits</h2>
 
-	
-    <div class="flex w-full h-72 justify-center items-center mt-6">
-    <div class="flex w-3/4 h-72 justify-center items-center gap-5">
 
-{% for product in products %}
-   
-            <div class="flex w-1/4 h-full justify-center items-center border-2 border-solid rounded-md relative">
-				<img src={{}} alt="">
-				<div class="flex justify-center items-center absolute w-full h-full bg-amber-600 bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-					<div class="flex flex-col text-white text-center p-4 gap-8">
-						<p class="text-lg font-semibold">{{product.title}}</p>
-						<p class="text-sm mt-2">{{product.price}}</p>
-						<button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Ajouter au panier</button>
+	<div class="flex w-full h-72 justify-center items-center mt-6 flex-col">
+		<div class="flex w-3/4 h-72 justify-center items-center gap-5">
+
+			{% for product in products %}
+				<div
+					class="flex w-1/4 h-full justify-center items-center border-2 border-solid rounded-md relative">
+					{# <img src={{'App/public/images/products/' ~ imageName}} alt="Image du produit"> #}
+					<div class="flex justify-center items-center absolute w-full h-full bg-amber-600 bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+						<div class="flex flex-col text-white text-center p-4 gap-8">
+							<p class="text-lg font-semibold">{{product.title}}</p>
+							<p class="text-sm mt-2">{{product.price}}€</p>
+							<button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Ajouter au panier</button>
+						</div>
 					</div>
 				</div>
-			</div>
-
-{% endfor %}
+			{% endfor %}
 		</div>
+
+		<nav aria-label="products navigation pages">
+			<ul class="flex items-center -space-x-px h-8 text-sm mt-8 mb-16">
+				<li>
+					<a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-amber-700 border border-white hover:bg-amber-600 hover:text-white rounded-md dark:bg-amber-900 dark:border-white dark:text-white dark:hover:bg-amber-800 dark:hover:text-white">1</a>
+				</li>
+				<li>
+					<a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-amber-700 border border-white hover:bg-amber-600 hover:text-white rounded-md dark:bg-amber-900 dark:border-white dark:text-white dark:hover:bg-amber-800 dark:hover:text-white">2</a>
+				</li>
+				<li>
+					<a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-white bg-amber-500 hover:bg-amber-600 dark:border-white dark:bg-amber-800 dark:text-white rounded-md">3</a>
+				</li>
+			</ul>
+		</nav>
+
+
 	</div>
 
-	<footer class="flex justify-center items-center w-full h-20 bg-amber-800 mt-12">
-		<a href="#" class="">Contact</a>
+
+	<footer class="flex justify-start ml- items-center w-full h-20 bg-amber-800 mt-12">
+		<a href="#" class="text-white ml-14">Contact</a>
 	</footer>
 
 {% endblock %}

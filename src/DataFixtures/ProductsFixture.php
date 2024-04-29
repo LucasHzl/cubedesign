@@ -21,7 +21,7 @@ class ProductsFixture extends AbstractFixture implements DependentFixtureInterfa
     public function load(ObjectManager $manager)
     {
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 20; $i++) {
 
             $product = new Products();
             $product->setTitle($this->faker->words(2, true));

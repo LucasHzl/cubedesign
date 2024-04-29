@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CubeDesign - Profil{% endblock %}
+
+
+{% block body %}
+	<p>{{app.user.firstName}}</p>
+	<p>{{app.user.lastName}}</p>
+	<p>{{app.user.email}}</p>
+{% endblock %}
