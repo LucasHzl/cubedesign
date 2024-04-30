@@ -30,6 +30,8 @@
 					{% if app.user %}
 						<a href="/profil">{{ app.user.firstName ~ ' ' ~ app.user.lastName}}</a>
 						<a href="{{ path('app_logout') }}">Deconnexion</a>
+						{# {% elseif app.user.roles = "ROLE_ADMIN"%}
+							<a href="/admin">Administration</a> #}
 					{% else %}
 						<a href={{"/login"}}>Connexion</a>
 						<a href={{"/register"}}>Inscription</a>

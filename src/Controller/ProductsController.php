@@ -42,7 +42,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_products', methods: ['GET'])]
+    #[Route('/detail/{id}', name: 'app_products', methods: ['GET'])]
     public function show(Products $product): Response
     {
         
@@ -69,7 +69,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_products_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_products_delete', methods: ['POST'])]
     public function delete(Request $request, Products $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->getPayload()->get('_token'))) {
