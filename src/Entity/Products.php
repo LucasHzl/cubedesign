@@ -24,7 +24,6 @@ class Products
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
-    private ?string $title = null;
     #[Assert\Length(
         min: 3,
         max: 64,
@@ -32,49 +31,34 @@ class Products
         maxMessage: 'Le titre du produit doit faire au maximum {{ limit }} caractères',
     )]
     #[Assert\Regex(
-        pattern: '/^[a-z]+$/i',
-        htmlPattern: '^[a-zA-Z]+$'
+        pattern: '/^[a-zA-Z0-9\'\s]+$/i',
+        htmlPattern: '^[a-zA-Z0-9\'\s]+$'
     )]
+    
+    private ?string $title = null;
 
     #[ORM\Column(length: 256)]
-    private ?string $description = null;
     #[Assert\Length(
-        min: 32,
+        min: 1,
         max: 256,
         minMessage: 'La description du produit doit faire au minimum {{ limit }} caractères',
         maxMessage: 'La description du produit doit faire au maximum {{ limit }} caractères',
     )]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9]+$/i',
-        htmlPattern: '^[a-zA-Z0-9]+$'
-    )]    
+
+    private ?string $description = null;
 
     #[ORM\Column]
-    private ?float $price = null;
-    #[Assert\Length(
-        min: 1,
-        max: 4,
-        minMessage: 'Le prix du produit doit faire au minimum {{ limit }} caractères',
-        maxMessage: 'Le prix du produit doit faire au maximum {{ limit }} caractères',
-    )]
-    #[Assert\Regex(
-        pattern: '/^[0-9]+$/i',
-        htmlPattern: '^[0-9]+$'
-    )]
+
     #[Assert\PositiveOrZero]
+    private ?float $price = null;
 
     #[ORM\Column]
-    private ?int $stock = null;
-    #[Assert\Length(
-        min: 1,
-        max: 2,
-        minMessage: 'Le stock du produit doit faire au minimum {{ limit }} caractères',
-        maxMessage: 'Le stock du produit doit faire au maximum {{ limit }} caractères',
-    )]
+   
     #[Assert\Regex(
         pattern: '/^[0-9]+$/i',
         htmlPattern: '^[0-9]+$'
     )]
+    private ?int $stock = null;
 
     /**
      * @var Collection<int, Orders>
@@ -191,7 +175,6 @@ class Products
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
-
     }
 
     public function getImageFile(): ?File

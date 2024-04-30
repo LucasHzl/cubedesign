@@ -26,16 +26,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-
-
     #[Route('/profil', name: 'app_profil')]
-    public function profil(EntityManagerInterface $entityManager, HttpFoundationRequest $request): Response
+    public function profil(): Response
     {
         $user = $this->getUser();
 
         return $this->render('users/profil.html.twig', [
-            'controller_name' => 'HomeController',
             'user' => $user,
         ]);
     }

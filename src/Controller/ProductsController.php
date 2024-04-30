@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/products')]
+
 class ProductsController extends AbstractController
 {
     #[Route('/ppp', name: 'app_products_index', methods: ['GET'])]
@@ -87,7 +87,6 @@ class ProductsController extends AbstractController
         $product = $productsRepository->findOneBy(['id' => $id]);
       
         return $this->render('products/detail.html.twig', [
-            'controller_name' => 'ProductsController',
             'product' => $product
         ]);
     }

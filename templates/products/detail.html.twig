@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CubeDesign - {{product.title}}{% endblock %}
+
+
+{% block body %}
+<div class="flex justify-center items-center h-screen w-screen ">
+    <div class="flex justify-center items-center h-2/3 w-2/3 -mt-14 border-2 border-solid border-amber-400 rounded-r-md">
+	    <img class="h-full w-1/2" src="{{ asset('assets/images/products/' ~ product.imageName) }}" alt="Image du produit {{ product.title }}">
+        <div class="h-full w-1/2 flex justify-center items-center flex-col gap-10">
+            <h2 class="text-xl font-bold">{{product.title}}</h2>
+            <h3 class="text-xl font-semibold">{{product.price}}€</h3>
+            <p class="text-md p-5">{{ product.description|striptags }}</p>
+            <h4 class="text-lg">{{product.stock}} unités en stock</h4>
+            <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Ajouter au panier</button>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
