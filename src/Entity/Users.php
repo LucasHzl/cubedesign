@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -22,6 +23,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
+    #[Assert\Length(
+        min: 4,
+        max: 180,
+        minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre email doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
 
     /**
      * @var list<string> The user roles
@@ -34,12 +45,40 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+    #[Assert\Length(
+        min: 6, 
+        minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
 
     #[ORM\Column(length: 32)]
     private ?string $firstName = null;
+    #[Assert\Length(
+        min: 3,
+        max: 32,
+        minMessage: 'Votre prénom doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre prénom doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
 
     #[ORM\Column(length: 32)]
     private ?string $lastName = null;
+    #[Assert\Length(
+        min: 2,
+        max: 32,
+        minMessage: 'Votre nom doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre nom doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
 
     /**
      * @var Collection<int, Orders>

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -24,15 +25,56 @@ class Products
 
     #[ORM\Column(length: 64)]
     private ?string $title = null;
+    #[Assert\Length(
+        min: 3,
+        max: 64,
+        minMessage: 'Le titre du produit doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Le titre du produit doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$'
+    )]
 
     #[ORM\Column(length: 256)]
     private ?string $description = null;
+    #[Assert\Length(
+        min: 32,
+        max: 256,
+        minMessage: 'La description du produit doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'La description du produit doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]    
 
     #[ORM\Column]
     private ?float $price = null;
+    #[Assert\Length(
+        min: 1,
+        max: 4,
+        minMessage: 'Le prix du produit doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Le prix du produit doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        htmlPattern: '^[0-9]+$'
+    )]
+    #[Assert\PositiveOrZero]
 
     #[ORM\Column]
     private ?int $stock = null;
+    #[Assert\Length(
+        min: 1,
+        max: 2,
+        minMessage: 'Le stock du produit doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Le stock du produit doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        htmlPattern: '^[0-9]+$'
+    )]
 
     /**
      * @var Collection<int, Orders>

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
 class Orders
@@ -25,6 +26,18 @@ class Orders
     #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'relation_products_orders')]
     private Collection $products;
 
+    
+    #[Assert\Length(
+        min: 5,
+        max: 5,
+        minMessage: 'Le numéro de commande doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Le numéro de commande doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        htmlPattern: '^[0-9]+$'
+    )]
+    #[Assert\PositiveOrZero]
     #[ORM\Column(length: 5)]
     private ?string $order_number = null;
 
