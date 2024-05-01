@@ -5,13 +5,22 @@
 
 
 {% block body %}
+
+
 	<div class="flex justify-center items-center h-screen w-screen border-2-solid">
 		<div class="flex justify-center items-center h-1/3 w-1/3 border-solid border-2 -mt-44 flex-col">
 			<h2 class="text-3xl underline">Panier</h2>
 			<div class="flex w-full h-3/4 justify-start flex-col gap-10 ml-8 pt-8">
-				<h2 class="text-xl font-bold"></h2>
-				<h3 class="text-xl font-semibold"></h3>
-				<h4 class="text-lg"></h4>
+				{% for productsInCart in userCart %}
+    <h3 class="text-xl font-semibold">Produit
+        {{ productsInCart.products.title }}
+        - Quantité :
+        {{ productsInCart.quantity }}</h3>
+    <a href="{{ path('app_cart_delete', {'id': productsInCart.products.id}) }}">
+        <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Supprimer</button>
+    </a>
+{% endfor %}
+
 			</div>
 		</div>
 	</div>

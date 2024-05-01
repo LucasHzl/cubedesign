@@ -62,7 +62,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/oooooo', name: 'app_cart_delete', methods: ['POST'])]
+    #[Route('/oooooo', name: 'hhbhjbkjbb', methods: ['POST'])]
     public function delete(Request $request, Cart $cart, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $cart->getId(), $request->getPayload()->get('_token'))) {
@@ -74,9 +74,15 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart', name: 'app_cart', methods: ['GET'])]
-    public function index(CartRepository $cartRepository): Response
+    public function index(CartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('cart/cart.html.twig', []);
+        $user = $this->getUser();
+
+        $cartRepository = $entityManager->getRepository(Cart::class);
+
+        $userCart = $cartRepository->findBy(['user' => $user]);
+
+        return $this->render('cart/cart.html.twig', ['userCart' => $userCart]);
     }
 
     #[Route('/product/{id}/addtocart', name: 'app_cart_add', methods: ['GET'])]
@@ -112,9 +118,38 @@ class CartController extends AbstractController
 
         $entityManager->persist($cart);
 
+        $entityManager->flush();
+
+        $userCart = $cartRepository->findall(['user' => $user]);
+
+        return $this->render('cart/cart.html.twig', ['userCart' => $userCart]);
+    }
+
+    #[Route('/deletefromcart/{id}', name: 'app_cart_delete', methods: ['GET'])]
+    public function deleteFromCart($id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $user = $this->getUser();
+
+        $productsRepository = $entityManager->getRepository(Products::class);
+
+        $product = $productsRepository->findOneBy(['id' => $id]);
+
+        $product->setStock($product->getStock() + 1);
+
+        $cartRepository = $entityManager->getRepository(Cart::class);
+
+        $cart = $cartRepository->findOneBy([
+            'user' => $user->getId(),
+            'product' => $product
+        ]);
+
+        $entityManager->remove($cart);
 
         $entityManager->flush();
 
-        return $this->render('cart/cart.html.twig', []);
+        $userCart = $cartRepository->findall(['user' => $user]);
+
+        return $this->render('cart/cart.html.twig', ['userCart' => $userCart]);
     }
 }
