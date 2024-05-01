@@ -16,6 +16,13 @@ class Cart
     #[ORM\Column]
     private ?int $quantity = null;
 
+    #[ORM\ManyToOne(inversedBy: 'relation_users_cart')]
+    private ?Users $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cart')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Products $product = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +36,30 @@ class Cart
     public function setQuantity(int $quantity): static
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProducts(): ?Products
+    {
+        return $this->product;
+    }
+
+    public function setProducts(?Products $product): static
+    {
+        $this->product = $product;
 
         return $this;
     }

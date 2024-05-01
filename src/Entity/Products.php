@@ -77,9 +77,16 @@ class Products
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    /**
+     * @var Collection<int, Cart>
+     */
+    #[ORM\OneToMany(targetEntity: Cart::class, mappedBy: 'product', orphanRemoval: true)]
+    private Collection $cart;
+
     public function __construct()
     {
         $this->relation_products_orders = new ArrayCollection();
+        $this->cart = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,5 +197,35 @@ class Products
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCart(): Collection
+    {
+        return $this->cart;
+    }
+
+    public function addCart(Cart $cart): static
+    {
+        if (!$this->cart->contains($cart)) {
+            $this->cart->add($cart);
+            $cart->setRelationCartProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): static
+    {
+        if ($this->cart->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getRelationCartProducts() === $this) {
+                $cart->setRelationCartProducts(null);
+            }
+        }
+
+        return $this;
     }
 }

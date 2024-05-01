@@ -26,22 +26,32 @@
 					<h1 class="ml-14 text-2xl">CubeDesign</h1>
 				</a>
 				<div class="flex justify-center items-center gap-5 mr-14">
-						
+
 					{% if app.user %}
 						<a href="/profil">{{ app.user.firstName ~ ' ' ~ app.user.lastName}}</a>
 						<a href="{{ path('app_logout') }}">Deconnexion</a>
 						{# {% elseif app.user.roles = "ROLE_ADMIN"%}
-							<a href="/admin">Administration</a> #}
+													<a href="/admin">Administration</a> #}
 					{% else %}
 						<a href={{"/login"}}>Connexion</a>
 						<a href={{"/register"}}>Inscription</a>
 					{% endif %}
-                        <a href={{"/cart"}}>Panier</a>
+					<a href={{"/cart"}}>Panier</a>
 				</div>
 			</header>
 		{% endblock %}
 
 		{% block body %}
-		{% endblock %}
-	</body>
-</html>
+{# 
+		{% for label, messages in app.flashes %}
+    {% for message in messages %}
+			<div class="">
+			{{message}}
+			<button type="button" class="close" data-
+			dismiss="alert"
+			aria-Label="Close">
+			<spanaria-hidden="true">&times;</spany</button>
+		</div>
+	{% endfor %}
+	{% endfor %} #}
+{% endblock %}</html></body></html>

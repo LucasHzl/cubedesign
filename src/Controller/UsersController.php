@@ -43,7 +43,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_users_show', methods: ['GET'])]
+    #[Route('/jjj', name: 'app_users_show', methods: ['GET'])]
     public function show(Users $user): Response
     {
         return $this->render('users/show.html.twig', [
@@ -69,7 +69,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
+    #[Route('/ooo', name: 'app_users_delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {

@@ -12,7 +12,9 @@
             <h3 class="text-xl font-semibold">{{product.price}}€</h3>
             <p class="text-md p-5">{{ product.description|striptags }}</p>
             <h4 class="text-lg">{{product.stock}} unités en stock</h4>
+            <a href="/product/{{product.id}}/addtocart">
             <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Ajouter au panier</button>
+            </a>
         </div>
     </div>
     </div>
