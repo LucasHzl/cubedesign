@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class HomeController extends AbstractController
 {
-     #[Route('/home', name: 'app_home')]
+     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $productsRepository = $entityManager->getRepository(Products::class);

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class UsersController extends AbstractController
 {
-    #[Route('/', name: 'app_users_index', methods: ['GET'])]
+    #[Route('/oooo', name: 'app_users_index', methods: ['GET'])]
     public function index(UsersRepository $usersRepository): Response
     {
         return $this->render('users/index.html.twig', [
