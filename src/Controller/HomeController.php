@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categories;
 use App\Entity\Products;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,15 +14,20 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class HomeController extends AbstractController
 {
-     #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $productsRepository = $entityManager->getRepository(Products::class);
 
         $products = $productsRepository->findAll();
 
+        $categoriesRepository = $entityManager->getRepository(Categories::class);
+
+        $categories = $categoriesRepository->findAll();
+
         return $this->render('home/index.html.twig', [
             'products' => $products,
+            'categories' => $categories
         ]);
     }
 

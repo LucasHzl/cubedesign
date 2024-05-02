@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\Products;
 use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/categories')]
+
 class CategoriesController extends AbstractController
 {
-    #[Route('/', name: 'app_categories_index', methods: ['GET'])]
+    #[Route('/cccccc', name: 'app_categories_index', methods: ['GET'])]
     public function index(CategoriesRepository $categoriesRepository): Response
     {
         return $this->render('categories/index.html.twig', [
@@ -42,7 +43,7 @@ class CategoriesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_categories_show', methods: ['GET'])]
+    #[Route('/pppppp', name: 'app_categories_show', methods: ['GET'])]
     public function show(Categories $category): Response
     {
         return $this->render('categories/show.html.twig', [
@@ -68,7 +69,7 @@ class CategoriesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_categories_delete', methods: ['POST'])]
+    #[Route('/lllllll', name: 'app_categories_delete', methods: ['POST'])]
     public function delete(Request $request, Categories $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
@@ -77,5 +78,22 @@ class CategoriesController extends AbstractController
         }
 
         return $this->redirectToRoute('app_categories_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('category/{id}', name: 'app_category_filtered')]
+    public function productDetail($id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $categoriesRepository = $entityManager->getRepository(Categories::class);
+        $category = $categoriesRepository->findOneBy(['id' => $id]);
+
+
+        $productsRepository = $entityManager->getRepository(Products::class);
+        $filteredProducts = $productsRepository->findBy(['category' => $id]);
+
+      
+        return $this->render('categories/filteredProducts.html.twig', [
+            'category' => $category,
+            'filteredProducts' => $filteredProducts,
+        ]);
     }
 }

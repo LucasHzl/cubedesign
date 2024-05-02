@@ -22,7 +22,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_products_new', methods: ['GET', 'POST'])]
+    #[Route('/kkkkkk', name: 'app_products_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Products();
