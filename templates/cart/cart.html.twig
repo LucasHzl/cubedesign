@@ -1,23 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    CubeDesign - Panier
+	CubeDesign - Panier
 {% endblock %}
 
 {% block body %}
-    <div class="flex justify-center items-center min-h-screen bg-white">
-        <div class="container mx-auto md:w-2/3 lg:w-1/2 xl:w-1/3 mt-16 bg-white border border-gray-300 rounded-lg p-8">
-            <h2 class="text-3xl underline mb-6">Panier</h2>
-            <div class="flex flex-col gap-6">
-                {% for productsInCart in userCart %}
-                    <div class="flex flex-col md:flex-row items-center justify-between">
-                        <h3 class="text-xl font-semibold mb-2 md:mb-0">Produit {{ productsInCart.products.title }} - Quantité: {{ productsInCart.quantity }}</h3>
-                        <a href="{{ path('app_cart_delete', {'id': productsInCart.products.id}) }}">
-                            <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">Supprimer</button>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+	<div class="flex justify-center items-center min-h-screen bg-white">
+		<div class="container mx-auto md:w-2/3 lg:w-1/2 xl:w-1/3 mt-16 bg-white border border-gray-300 rounded-lg p-8">
+			<h2 class="text-3xl underline mb-6">Panier</h2>
+			<div class="flex flex-col gap-6">
+				{% for productsInCart in userCart %}
+					<div class="flex flex-col md:flex-row items-center justify-between">
+						<h3 class="text-xl font-semibold mb-2 md:mb-0">Produit
+							{{ productsInCart.products.title }}
+							- Quantité:
+							{{ productsInCart.quantity }}</h3>
+						<a href="{{ path('app_cart_delete', {'id': productsInCart.products.id}) }}">
+							<button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">Supprimer</button>
+						</a>
+					</div>
+				{% endfor %}
+				<a href="/placeorder">
+					<button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">Acheter</button>
+				</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

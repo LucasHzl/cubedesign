@@ -28,7 +28,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
         maxMessage: 'Votre email doit faire au maximum {{ limit }} caractères',
     )]
-   
     private ?string $email = null;
 
     /**

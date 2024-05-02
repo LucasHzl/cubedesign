@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CubeDesign - Contact
+{% endblock %}
+
+{% block body %}
+
+	<section class="flex justify-center items-center mt-20">
+    <div class="flex justify-start items-start">
+		{{ form_errors(MessagesForm) }}
+
+            {{ form_start(MessagesForm, {'attr': {'class': 'space-y-6'}}) }}
+			<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-20">
+			<h2 class="h3 mb-3 mt-6 font-weight-normal">Nous contacter</h2>
+                <div class="mb-6 text-sm">
+                    {{ form_label(MessagesForm.first_name, 'Prénom', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(MessagesForm.first_name, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'prénom'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(MessagesForm.last_name, 'Nom', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(MessagesForm.last_name, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'nom'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(MessagesForm.email, 'Email', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(MessagesForm.email, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'email'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(MessagesForm.message, 'Message', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(MessagesForm.message, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'message'}}) }}
+                </div class="mb-6 text-sm">
+              
+
+                <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Envoyer</button>
+				</div>
+            {{ form_end(MessagesForm) }}
+    </div>
+</section>
+
+
+{% endblock %}

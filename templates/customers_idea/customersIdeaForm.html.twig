@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CubeDesign - Soumettre une idée
+{% endblock %}
+
+{% block body %}
+
+	<section class="flex justify-center items-center mt-20">
+    <div class="flex justify-start items-start">
+		{{ form_errors(customersIdeaForm) }}
+
+            {{ form_start(customersIdeaForm, {'attr': {'class': 'space-y-6'}}) }}
+			<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-20">
+			<h2 class="h3 mb-3 mt-6 font-weight-normal">Nous contacter</h2>
+                <div class="mb-6 text-sm">
+                    {{ form_label(customersIdeaForm.first_name, 'Prénom', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(customersIdeaForm.first_name, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'prénom'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(customersIdeaForm.last_name, 'Nom', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(customersIdeaForm.last_name, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'nom'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(customersIdeaForm.email, 'Email', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(customersIdeaForm.email, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'email'}}) }}
+                </div>
+                <div class="mb-6 text-sm">
+                    {{ form_label(customersIdeaForm.message, 'Message', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(customersIdeaForm.message, {'attr': {'class': 'shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'message'}}) }}
+                </div class="mb-6 text-sm">
+              
+
+                <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Envoyer</button>
+				</div>
+            {{ form_end(customersIdeaForm) }}
+    </div>
+</section>
+
+
+{% endblock %}

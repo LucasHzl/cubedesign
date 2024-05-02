@@ -95,9 +95,9 @@ class CartController extends AbstractController
 
         $product = $productsRepository->findOneBy(['id' => $id]);
         if ($product == null) {
-            $this->addFlash('notice', 'Hello world');
+            $this->addFlash('info', "Le produit que vous essayer d'ajouter au panier n'existe pas !");
             $products = $productsRepository->findAll();
-            return $this->render('home/index.html.twig', ['products' => $products]);
+            return $this->redirectToRoute('app_home');
 
         }
         $product->setStock($product->getStock() - 1);
@@ -122,7 +122,7 @@ class CartController extends AbstractController
 
         $userCart = $cartRepository->findall(['user' => $user]);
 
-        return $this->render('cart/cart.html.twig', ['userCart' => $userCart]);
+        return $this->redirectToRoute('app_cart', [], 301);
     }
 
     #[Route('/deletefromcart/{id}', name: 'app_cart_delete', methods: ['GET'])]

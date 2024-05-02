@@ -20,12 +20,7 @@ class Orders
     #[ORM\ManyToOne(inversedBy: 'relation_users_orders')]
     private ?Users $user = null;
 
-    /**
-     * @var Collection<int, Products>
-     */
-    #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'relation_products_orders')]
-    private Collection $products;
-
+   
     
     #[Assert\Length(
         min: 5,
@@ -44,9 +39,15 @@ class Orders
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    /**
+     * @var Collection<int, ProductsOrders>
+     */
+    #[ORM\OneToMany(targetEntity: ProductsOrders::class, mappedBy: 'order', orphanRemoval: true)]
+    private Collection $productsOrders;
+
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->productsOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,33 +66,7 @@ class Orders
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Products>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Products $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->addRelationProductsOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Products $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeRelationProductsOrder($this);
-        }
-
-        return $this;
-    }
+   
 
     public function getOrderNumber(): ?string
     {
@@ -113,6 +88,36 @@ class Orders
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductsOrders>
+     */
+    public function getProductsOrders(): Collection
+    {
+        return $this->productsOrders;
+    }
+
+    public function addProductsOrder(ProductsOrders $productsOrder): static
+    {
+        if (!$this->productsOrders->contains($productsOrder)) {
+            $this->productsOrders->add($productsOrder);
+            $productsOrder->setOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductsOrder(ProductsOrders $productsOrder): static
+    {
+        if ($this->productsOrders->removeElement($productsOrder)) {
+            // set the owning side to null (unless already changed)
+            if ($productsOrder->getOrder() === $this) {
+                $productsOrder->setOrder(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MessagesRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MessagesRepository::class)]
@@ -14,15 +15,47 @@ class Messages
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 4,
+        max: 180,
+        minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre email doit faire au maximum {{ limit }} caractères',
+    )]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 1,
+        max: 256,
+        minMessage: 'Votre message doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre message doit faire au maximum {{ limit }} caractères',
+    )]
     private ?string $message = null;
 
     #[ORM\Column(length: 32)]
+    #[Assert\Length(
+        min: 3,
+        max: 32,
+        minMessage: 'Votre prénom doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre prénom doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 32)]
+    #[Assert\Length(
+        min: 2,
+        max: 32,
+        minMessage: 'Votre nom doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre nom doit faire au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/i',
+        htmlPattern: '^[a-zA-Z0-9]+$'
+    )]
     private ?string $last_name = null;
 
     public function getId(): ?int

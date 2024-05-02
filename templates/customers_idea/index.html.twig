@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CustomersIdea index{% endblock %}
+
+{% block body %}
+    <h1>CustomersIdea index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customers_idea in customers_ideas %}
+            <tr>
+                <td>{{ customers_idea.id }}</td>
+                <td>{{ customers_idea.firstName }}</td>
+                <td>{{ customers_idea.lastName }}</td>
+                <td>{{ customers_idea.email }}</td>
+                <td>{{ customers_idea.message }}</td>
+                <td>
+                    <a href="{{ path('app_customers_idea_show', {'id': customers_idea.id}) }}">show</a>
+                    <a href="{{ path('app_customers_idea_edit', {'id': customers_idea.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customers_idea_new') }}">Create new</a>
+{% endblock %}

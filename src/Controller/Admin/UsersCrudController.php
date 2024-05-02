@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UsersCrudController extends AbstractCrudController
 {
@@ -16,7 +18,7 @@ class UsersCrudController extends AbstractCrudController
         return Users::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -24,7 +26,17 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('first_name'),
             TextField::new('last_name'),
             TextField::new('email'),
-            TextField::new('password'),
+            TextField::new('password')
+                ->setFormType(RepeatedType::class)
+                ->setFormTypeOptions([
+                    'type' => PasswordType::class,
+                    'first_options' => [
+                        'label' => 'Password',
+                        'hash_property_path' => 'password',
+                    ],
+                    'second_options' => ['label' => '(Repeat)'],
+                    'mapped' => false,
+                ]),
             ChoiceField::new('roles', 'Roles')
                 ->setPermission(('ROLE_USER'))
                 ->allowMultipleChoices()
@@ -38,5 +50,4 @@ class UsersCrudController extends AbstractCrudController
                 ])
         ];
     }
-    
 }

@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\CustomersIdea;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class CustomersIdeaType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('first_name')
+            ->add('last_name')
+            ->add('email')
+            ->add('message')
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => CustomersIdea::class,
+        ]);
+    }
+}

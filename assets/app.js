@@ -7,4 +7,8 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+document.querySelectorAll('.flashMessage').forEach(flashMessage => {
+    setTimeout(()=>{
+        flashMessage.remove()
+    }, 3000)
+})

@@ -11,10 +11,17 @@
             <h3 class="text-xl font-semibold">{{ product.price }}€</h3>
             <p class="text-md text-center">{{ product.description|striptags }}</p>
             <h4 class="text-lg">{{ product.stock }} unités en stock</h4>
+            <p>Identifiez-vous pour ajouter au panier !</p>
+            {% if app.user %}
             <a href="/product/{{ product.id }}/addtocart">
                 <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Ajouter au panier</button>
             </a>
+            {% endif %}
         </div>
     </div>
 </div>
+<footer class="flex justify-start items-center w-full h-20 bg-amber-800 mt-12">
+    <a href="/contact" class="text-white ml-4">Contact</a>
+    <a href="/submitanidea" class="text-white ml-4">Soumettre une idée</a>
+</footer>
 {% endblock %}

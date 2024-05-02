@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Messages;
+use App\Form\MessagesFormType;
 use App\Form\MessagesType;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/messages')]
+
 class MessagesController extends AbstractController
 {
-    #[Route('/', name: 'app_messages_index', methods: ['GET'])]
+    #[Route('/dzdzdzzdz', name: 'app_messages_index', methods: ['GET'])]
     public function index(MessagesRepository $messagesRepository): Response
     {
         return $this->render('messages/index.html.twig', [
@@ -42,7 +43,7 @@ class MessagesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_messages_show', methods: ['GET'])]
+    #[Route('/djksjdk', name: 'app_messages_show', methods: ['GET'])]
     public function show(Messages $message): Response
     {
         return $this->render('messages/show.html.twig', [
@@ -68,7 +69,7 @@ class MessagesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_messages_delete', methods: ['POST'])]
+    #[Route('/djzndjkznd', name: 'app_messages_delete', methods: ['POST'])]
     public function delete(Request $request, Messages $message, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->getPayload()->get('_token'))) {
@@ -77,5 +78,28 @@ class MessagesController extends AbstractController
         }
 
         return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/contact', name: 'app_contact')]
+    public function createThread(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $message = new Messages();
+
+        $MessagesForm = $this->createForm(MessagesFormType::class, $message);
+
+        $MessagesForm->handleRequest($request);
+
+
+        if ($MessagesForm->isSubmitted() && $MessagesForm->isValid()) {
+
+            $entityManager->persist($message);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('messages/messagesForm.html.twig', [
+            'MessagesForm' => $MessagesForm
+        ]);
     }
 }

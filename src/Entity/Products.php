@@ -60,12 +60,6 @@ class Products
     )]
     private ?int $stock = null;
 
-    /**
-     * @var Collection<int, Orders>
-     */
-    #[ORM\ManyToMany(targetEntity: Orders::class, inversedBy: 'products')]
-    private Collection $relation_products_orders;
-
 
     #[ORM\ManyToOne(inversedBy: 'relation_categories_products')]
     #[ORM\JoinColumn(nullable: false)]
@@ -83,10 +77,16 @@ class Products
     #[ORM\OneToMany(targetEntity: Cart::class, mappedBy: 'product', orphanRemoval: true)]
     private Collection $cart;
 
+    /**
+     * @var Collection<int, ProductsOrders>
+     */
+    #[ORM\OneToMany(targetEntity: ProductsOrders::class, mappedBy: 'product', orphanRemoval: true)]
+    private Collection $productsOrders;
+
     public function __construct()
     {
-        $this->relation_products_orders = new ArrayCollection();
         $this->cart = new ArrayCollection();
+        $this->productsOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,30 +138,6 @@ class Products
     public function setStock(int $stock): static
     {
         $this->stock = $stock;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Orders>
-     */
-    public function getRelationProductsOrders(): Collection
-    {
-        return $this->relation_products_orders;
-    }
-
-    public function addRelationProductsOrder(Orders $relationProductsOrder): static
-    {
-        if (!$this->relation_products_orders->contains($relationProductsOrder)) {
-            $this->relation_products_orders->add($relationProductsOrder);
-        }
-
-        return $this;
-    }
-
-    public function removeRelationProductsOrder(Orders $relationProductsOrder): static
-    {
-        $this->relation_products_orders->removeElement($relationProductsOrder);
 
         return $this;
     }
@@ -223,6 +199,36 @@ class Products
             // set the owning side to null (unless already changed)
             if ($cart->getRelationCartProducts() === $this) {
                 $cart->setRelationCartProducts(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductsOrders>
+     */
+    public function getProductsOrders(): Collection
+    {
+        return $this->productsOrders;
+    }
+
+    public function addProductsOrder(ProductsOrders $productsOrder): static
+    {
+        if (!$this->productsOrders->contains($productsOrder)) {
+            $this->productsOrders->add($productsOrder);
+            $productsOrder->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductsOrder(ProductsOrders $productsOrder): static
+    {
+        if ($this->productsOrders->removeElement($productsOrder)) {
+            // set the owning side to null (unless already changed)
+            if ($productsOrder->getProduct() === $this) {
+                $productsOrder->setProduct(null);
             }
         }
 
