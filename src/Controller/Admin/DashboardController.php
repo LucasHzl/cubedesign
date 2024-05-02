@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Categories;
+use App\Entity\Messages;
 use App\Entity\Orders;
 use App\Entity\Products;
 use App\Entity\Users;
