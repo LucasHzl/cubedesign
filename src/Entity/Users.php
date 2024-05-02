@@ -22,17 +22,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
     #[Assert\Length(
         min: 4,
         max: 180,
         minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
         maxMessage: 'Votre email doit faire au maximum {{ limit }} caractères',
     )]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9]+$/i',
-        htmlPattern: '^[a-zA-Z0-9]+$'
-    )]
+   
+    private ?string $email = null;
 
     /**
      * @var list<string> The user roles
@@ -44,18 +41,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
     #[Assert\Length(
-        min: 6, 
-        minMessage: 'Votre email doit faire au minimum {{ limit }} caractères',
+        min: 5,
+        minMessage: 'Votre mot de passe doit faire au minimum {{ limit }} caractères',
     )]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z0-9]+$/i',
         htmlPattern: '^[a-zA-Z0-9]+$'
     )]
+    private ?string $password = null;
 
     #[ORM\Column(length: 32)]
-    private ?string $firstName = null;
     #[Assert\Length(
         min: 3,
         max: 32,
@@ -66,9 +62,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         pattern: '/^[a-zA-Z0-9]+$/i',
         htmlPattern: '^[a-zA-Z0-9]+$'
     )]
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 32)]
-    private ?string $lastName = null;
     #[Assert\Length(
         min: 2,
         max: 32,
@@ -79,6 +75,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         pattern: '/^[a-zA-Z0-9]+$/i',
         htmlPattern: '^[a-zA-Z0-9]+$'
     )]
+    private ?string $lastName = null;
 
     /**
      * @var Collection<int, Orders>

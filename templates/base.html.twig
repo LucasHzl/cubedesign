@@ -21,25 +21,23 @@
 	</head>
 	<body>
 		{% block header %}
-			<header class="flex justify-between items-center w-full h-20 bg-amber-200">
-				<a href={{"/"}}>
-					<h1 class="ml-14 text-2xl">CubeDesign</h1>
-				</a>
-				<div class="flex justify-center items-center gap-5 mr-14">
+    <header class="flex flex-col md:flex-row justify-between items-center w-full h-auto md:h-20 bg-amber-200 px-4 md:px-8">
+        <a href={{"/"}} class="mb-4 md:mb-0">
+            <h1 class="text-2xl">CubeDesign</h1>
+        </a>
+        <div class="flex justify-center md:justify-end items-center gap-4 md:gap-8">
+            {% if app.user %}
+                <a href="/profil" class="text-sm md:text-base">{{ app.user.firstName ~ ' ' ~ app.user.lastName}}</a>
+                <a href="{{ path('app_logout') }}" class="text-sm md:text-base">Déconnexion</a>
+            {% else %}
+                <a href={{"/login"}} class="text-sm md:text-base">Connexion</a>
+                <a href={{"/register"}} class="text-sm md:text-base">Inscription</a>
+            {% endif %}
+            <a href={{"/cart"}} class="text-sm md:text-base">Panier</a>
+        </div>
+    </header>
+{% endblock %}
 
-					{% if app.user %}
-						<a href="/profil">{{ app.user.firstName ~ ' ' ~ app.user.lastName}}</a>
-						<a href="{{ path('app_logout') }}">Deconnexion</a>
-						{# {% elseif app.user.roles = "ROLE_ADMIN"%}
-													<a href="/admin">Administration</a> #}
-					{% else %}
-						<a href={{"/login"}}>Connexion</a>
-						<a href={{"/register"}}>Inscription</a>
-					{% endif %}
-					<a href={{"/cart"}}>Panier</a>
-				</div>
-			</header>
-		{% endblock %}
 
 		{% block body %}
 {# 
