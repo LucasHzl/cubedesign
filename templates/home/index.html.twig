@@ -9,9 +9,15 @@
 			{{ message }}
 		</div>
 	{% endfor %}
-	<div class="flex w-full h-96 border-2 border-solid justify-center items-center">
-		<p>background image</p>
-	</div>
+	{% for message in app.flashes('success') %}
+		<div class="w-full absolute top-10  text-center mt-10 bg-green-100 border inline-block border-green-200 text-green-600 p-4 rounded text-lg mb-8 flashMessage" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+	<div class="flex w-full h-96 md:h-64 lg:h-96 justify-center items-center mt-8">
+    <img class="w-full h-full object-cover p-6" src="{{ asset('images/banner.png') }}" alt="Image de la bannière du site">
+</div>
+
 
 
 	<h2 class="text-center mt-8 text-xl">Collections</h2>

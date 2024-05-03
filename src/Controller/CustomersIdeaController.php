@@ -93,9 +93,11 @@ class CustomersIdeaController extends AbstractController
 
             $entityManager->persist($customersIdea);
             $entityManager->flush();
+            $this->addFlash('success', "Votre suggestion a bien été envoyée !");
             return $this->redirectToRoute('app_home');
         }
 
+        
         return $this->render('customers_idea/customersIdeaForm.html.twig', [
             'customersIdeaForm' => $customersIdeaForm
         ]);

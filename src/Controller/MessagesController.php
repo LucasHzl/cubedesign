@@ -95,6 +95,7 @@ class MessagesController extends AbstractController
 
             $entityManager->persist($message);
             $entityManager->flush();
+            $this->addFlash('success', "Votre message a bien été envoyée !");
             return $this->redirectToRoute('app_home');
         }
 

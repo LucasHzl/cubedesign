@@ -36,7 +36,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/ffffff', name: 'app_cart_show', methods: ['GET'])]
+    #[Route('/cartshow', name: 'app_cart_show', methods: ['GET'])]
     public function show(Cart $cart): Response
     {
         return $this->render('cart/show.html.twig', [
@@ -122,7 +122,9 @@ class CartController extends AbstractController
 
         $userCart = $cartRepository->findall(['user' => $user]);
 
+        $this->addFlash('success', "Le produit a bien été ajouté au panier");
         return $this->redirectToRoute('app_cart', [], 301);
+
     }
 
     #[Route('/deletefromcart/{id}', name: 'app_cart_delete', methods: ['GET'])]

@@ -120,6 +120,7 @@ class OrdersController extends AbstractController
 
         $entityManager->flush();
 
+        $this->addFlash('success', "Votre commande a bien été passée !");
         return $this->redirectToRoute('app_home');
     }
 }
