@@ -14,15 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CustomersIdeaController extends AbstractController
 {
-    #[Route('/fefzefezfez', name: 'app_customers_idea_index', methods: ['GET'])]
-    public function index(CustomersIdeaRepository $customersIdeaRepository): Response
-    {
-        return $this->render('customers_idea/index.html.twig', [
-            'customers_ideas' => $customersIdeaRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_customers_idea_new', methods: ['GET', 'POST'])]
+    #[Route('/newcustomeridea', name: 'app_customers_idea_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $customersIdea = new CustomersIdea();
@@ -42,14 +34,6 @@ class CustomersIdeaController extends AbstractController
         ]);
     }
 
-    #[Route('/ejfzejfezs', name: 'app_customers_idea_show', methods: ['GET'])]
-    public function show(CustomersIdea $customersIdea): Response
-    {
-        return $this->render('customers_idea/show.html.twig', [
-            'customers_idea' => $customersIdea,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_customers_idea_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CustomersIdea $customersIdea, EntityManagerInterface $entityManager): Response
     {
@@ -66,17 +50,6 @@ class CustomersIdeaController extends AbstractController
             'customers_idea' => $customersIdea,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/datfdyazvdh', name: 'app_customers_idea_delete', methods: ['POST'])]
-    public function delete(Request $request, CustomersIdea $customersIdea, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$customersIdea->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($customersIdea);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_customers_idea_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/submitanidea', name: 'app_customers_idea_submit')]

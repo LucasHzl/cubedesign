@@ -14,34 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProductsController extends AbstractController
 {
-    #[Route('/ppp', name: 'app_products_index', methods: ['GET'])]
-    public function index(ProductsRepository $productsRepository): Response
-    {
-        return $this->render('products/index.html.twig', [
-            'products' => $productsRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/kkkkkk', name: 'app_products_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $product = new Products();
-        $form = $this->createForm(ProductsType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_products_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('products/new.html.twig', [
-            'product' => $product,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/detail/{id}', name: 'app_products', methods: ['GET'])]
     public function show(Products $product): Response
     {

@@ -18,15 +18,7 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class OrdersController extends AbstractController
 {
-    #[Route('/zadzdazxasqz', name: 'app_orders_index', methods: ['GET'])]
-    public function index(OrdersRepository $ordersRepository): Response
-    {
-        return $this->render('orders/index.html.twig', [
-            'orders' => $ordersRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_orders_new', methods: ['GET', 'POST'])]
+    #[Route('/neword', name: 'app_orders_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $order = new Orders();
@@ -46,14 +38,6 @@ class OrdersController extends AbstractController
         ]);
     }
 
-    #[Route('/alzkjdlaz', name: 'app_orders_show', methods: ['GET'])]
-    public function show(Orders $order): Response
-    {
-        return $this->render('orders/show.html.twig', [
-            'order' => $order,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_orders_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Orders $order, EntityManagerInterface $entityManager): Response
     {
@@ -70,17 +54,6 @@ class OrdersController extends AbstractController
             'order' => $order,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/lakzndklaz', name: 'app_orders_delete', methods: ['POST'])]
-    public function delete(Request $request, Orders $order, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($order);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_orders_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/placeorder', name: 'app_orders_place', methods: ['GET'])]

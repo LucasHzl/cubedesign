@@ -15,15 +15,7 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class UsersController extends AbstractController
 {
-    #[Route('/oooo', name: 'app_users_index', methods: ['GET'])]
-    public function index(UsersRepository $usersRepository): Response
-    {
-        return $this->render('users/index.html.twig', [
-            'users' => $usersRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_users_new', methods: ['GET', 'POST'])]
+    #[Route('/newusr', name: 'app_users_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new Users();
@@ -40,14 +32,6 @@ class UsersController extends AbstractController
         return $this->render('users/new.html.twig', [
             'user' => $user,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/jjj', name: 'app_users_show', methods: ['GET'])]
-    public function show(Users $user): Response
-    {
-        return $this->render('users/show.html.twig', [
-            'user' => $user,
         ]);
     }
 
@@ -69,7 +53,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/ooo', name: 'app_users_delete', methods: ['POST'])]
+    #[Route('/userdlt', name: 'app_users_delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
