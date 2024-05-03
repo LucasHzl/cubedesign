@@ -12,11 +12,11 @@ class UsersFixture extends AbstractFixture
         {
 
             $adminUser = new Users();
-            $adminUser->setEmail('lucas@gmail.com   ');
+            $adminUser->setEmail('admin@admin.com');
             $adminUser->setRoles(['ROLE_ADMIN']);
-            $adminUser->setFirstName('lucas');
-            $adminUser->setLastName('lucas');
-            $adminUser->setPassword('$2y$13$odE/cGbgYHTi5eon8mULCeL4bNtn17nn4y.K/b8rM5KwfTGqYo3Ee');
+            $adminUser->setFirstName('admin');
+            $adminUser->setLastName('admin');
+            $adminUser->setPassword('$2y$13$EODFvo7J1xxRZFt6HwyiO.H.PyUlnlzopmgFbPoDGaLvuTBiDVK8C');
             $manager->persist($adminUser);
 
             for ($i = 0; $i < 10; $i ++) {
